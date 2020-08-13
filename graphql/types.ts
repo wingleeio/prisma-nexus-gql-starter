@@ -16,6 +16,8 @@ schema.objectType({
     name: 'Post',
     definition(t) {
         t.model.id();
+        t.model.createdAt();
+        t.model.updatedAt();
         t.model.title();
         t.model.content();
         t.model.author();
@@ -37,6 +39,8 @@ schema.objectType({
     name: 'Comment',
     definition(t) {
         t.model.id();
+        t.model.createdAt();
+        t.model.updatedAt();
         t.model.content();
         t.model.author();
         t.model.post();

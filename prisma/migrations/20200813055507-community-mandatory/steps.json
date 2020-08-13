@@ -1,0 +1,17 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "UpdateField",
+      "model": "Post",
+      "field": "communityId",
+      "arity": "Required"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "Post",
+      "field": "community",
+      "arity": "Required"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+# Prisma Migrate lockfile v1
+
+20200812055415-db-connection
+20200812060157-add-light-novel
+20200813031516-user-model
+20200813043529-posts-and-communities-and-comments
+20200813044301-rename
+20200813055507-community-mandatory

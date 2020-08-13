@@ -9,6 +9,14 @@ function App({ Component, pageProps, apollo }: AppProps) {
 }
 
 export default withApollo(({ initialState }) => new ApolloClient({
-  uri: 'http://localhost:3000/api/graphql',
-  cache: new InMemoryCache().restore(initialState ?? {})
+  uri: '/api/graphql',
+  cache: new InMemoryCache().restore(initialState ?? {}),
+  request: (operation) => {
+    const token = localStorage.getItem('token')
+    operation.setContext({
+      headers: {
+        authorization: token ? `Bearer ${token}` : ''
+      }
+    })
+  }
 }))(App)

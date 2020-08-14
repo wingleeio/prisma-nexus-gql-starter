@@ -6,7 +6,7 @@ import { Button } from 'antd';
 export default function Home() {
     const { user } = useMe();
     const { posts, getMorePosts } = usePost();
-
+    console.log(posts);
     return (
         <div>
             <Head>
@@ -14,7 +14,7 @@ export default function Home() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <main>
-                <Button onClick={() => { getMorePosts({ id: posts?.[0]?.id }) }}>Load More</Button>
+                <Button onClick={() => { getMorePosts({ id: posts?.[posts?.length - 1]?.id }) }}>Load More</Button>
             </main>
         </div>
     )

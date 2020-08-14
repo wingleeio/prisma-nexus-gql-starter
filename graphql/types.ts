@@ -8,7 +8,8 @@ schema.objectType({
         t.model.joined();
         t.model.username();
         t.model.role();
-        t.model.posts({ pagination: true });
+        t.model.posts({ pagination: true, ordering: true });
+        t.model.comments({ pagination: true, ordering: true });
     }
 })
 
@@ -22,7 +23,7 @@ schema.objectType({
         t.model.content();
         t.model.author();
         t.model.community();
-        t.model.comments({ pagination: true });
+        t.model.comments({ pagination: true, ordering: true });
     }
 })
 
@@ -31,7 +32,7 @@ schema.objectType({
     definition(t) {
         t.model.id();
         t.model.name();
-        t.model.posts({ pagination: true })
+        t.model.posts({ pagination: true, ordering: true })
     }
 })
 

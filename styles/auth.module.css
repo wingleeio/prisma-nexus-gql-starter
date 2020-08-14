@@ -1,0 +1,82 @@
+.sider {
+    min-height: 100%;   
+    min-width: 300px !important;
+    max-width: 500px !important;
+    flex-grow: 1 !important;
+    background-color: #6bd5e2;
+}
+
+.image {
+    position: absolute;
+    bottom: 128px;
+    padding: 32px;
+}
+
+.credits {
+    position: absolute;
+    bottom: 0px;
+    padding: 32px;
+    opacity: 0.8;
+}
+
+.call {
+    padding: 32px;
+    opacity: 0.8;
+}
+
+.slogan {
+    margin-top: 0px !important;
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    padding: 32px;
+}
+
+.form {
+    max-width: 320px;
+    min-width: 320px;
+}
+
+.formItem {
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+.input {
+    margin-top: 6px;
+}
+
+.button {
+    width: 100%;
+    margin-top: 12px;
+}
+
+.creditLink {
+    color: rgba(0, 0, 0, 0.65);
+    text-decoration: underline !important;
+}
+
+.creditLink:hover{
+    color: rgba(0, 0, 0, 0.45);
+}
+
+.creditLink:active{
+    color: rgba(0, 0, 0, 0.85);
+}
+
+.switch {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    padding: 32px;
+}
+
+@media (max-width: 720px) {
+    .sider {
+        display: none;
+    }
+}

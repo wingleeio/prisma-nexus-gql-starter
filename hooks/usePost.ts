@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/react-hooks';
 
 const POSTS_QUERY = gql`
     query PostsQuery {
-        posts(last: 3) {
+        posts(first: 3, orderBy: { createdAt: desc }) {
             id
             createdAt
             updatedAt
@@ -23,8 +23,8 @@ const POSTS_QUERY = gql`
 `
 
 const MORE_POSTS_QUERY = gql`
-    query PostsQuery($before: PostWhereUniqueInput) {
-        posts(last: 3, before: $before) {
+    query PostsQuery($after: PostWhereUniqueInput) {
+        posts(first: 3, after: $after, orderBy: { createdAt: desc }) {
             id
             createdAt
             updatedAt
@@ -47,16 +47,16 @@ export const usePost = () => {
     return {
         loading,
         posts: data?.posts,
-        getMorePosts: (before) => {
+        getMorePosts: (after) => {
             fetchMore({
                 query: MORE_POSTS_QUERY,
-                variables: { before },
+                variables: { after },
                 updateQuery: (prev, { fetchMoreResult }) => {
                     const prevPosts = prev?.posts ?? [];
                     const newPosts = fetchMoreResult?.posts ?? [];
 
                     return {
-                        posts: [...newPosts, ...prevPosts]
+                        posts: [...prevPosts, ...newPosts]
                     }
                 }
             })

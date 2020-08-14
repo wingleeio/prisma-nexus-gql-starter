@@ -6,10 +6,10 @@ schema.queryType({
         t.crud.post();
         t.crud.comment()
         t.crud.community();
-        t.crud.users({ filtering: true });
-        t.crud.posts({ filtering: true });
-        t.crud.comments({ filtering: true })
-        t.crud.communities({ filtering: true });
+        t.crud.users({ filtering: true, ordering: true });
+        t.crud.posts({ filtering: true, ordering: true });
+        t.crud.comments({ filtering: true, ordering: true })
+        t.crud.communities({ filtering: true, ordering: true });
 
         t.field('me', {
             type: 'User',
@@ -26,6 +26,5 @@ schema.queryType({
                 })
             },
         })
-
     }
 })

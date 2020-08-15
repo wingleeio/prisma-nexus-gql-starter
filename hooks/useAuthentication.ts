@@ -1,6 +1,7 @@
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
 import { useEffect } from 'react';
+import { ME_QUERY } from './useMe';
 
 const LOGIN_USER = gql`
     mutation LoginUser($email: String!, $password: String!) {
@@ -18,7 +19,7 @@ const REGISTER_USER = gql`
     }
 `
 
-const update = (_, { data }) => {
+const update = (_, { data, }) => {
     localStorage.setItem('communitiesToken', data?.login?.token ?? data?.register?.token)
 }
 
@@ -27,8 +28,12 @@ export const useAuthentication = () => {
     const [register, { loading: loading2 }] = useMutation(REGISTER_USER, { update });
 
     return {
-        login,
-        register,
+        login: variables => {
+            login({ variables, refetchQueries: [{ query: ME_QUERY }] })
+        },
+        register: variables => {
+            register({ variables, refetchQueries: [{ query: ME_QUERY }] })
+        },
         loading: loading1 || loading2
     }
 }

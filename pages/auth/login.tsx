@@ -1,21 +1,31 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import { useAuthentication } from "../../hooks/useAuthentication"
+import { useMe } from "../../hooks/useMe"
 import { App } from "../../components/layout/app";
 import { Layout, Typography, Input, Divider, Button } from "antd";
 import { useForm, Controller } from 'react-hook-form';
 import { UserOutlined, LockOutlined, GoogleOutlined } from '@ant-design/icons'
+import { useEffect } from 'react';
+import { useRouter } from 'next/router'
 
 const styles = require('../../styles/auth.module.css');
 
-export default function Login() {
-    const { control, handleSubmit, reset } = useForm();
-    const { login, loading } = useAuthentication();
+export default function Page() {
+    const { push } = useRouter()
+    const { loggedIn, loading: meLoading } = useMe();
+    const { control, handleSubmit, errors } = useForm();
+    const { login, loading: authLoading } = useAuthentication();
 
     const onSubmit = handleSubmit(variables => {
-        login({ variables });
-        reset();
+        login(variables);
     });
+
+    useEffect(() => {
+        if (loggedIn) {
+            push('/')
+        }
+    }, [loggedIn])
 
     return (
         <App>
@@ -53,6 +63,7 @@ export default function Login() {
                                 rules={{ required: true }}
                                 prefix={<UserOutlined />}
                             />
+                            {errors.email ? <Typography.Text type="danger"><small>Email is required.</small></Typography.Text> : null}
                         </div>
                         <div className={styles.formItem}>
                             <label>
@@ -70,8 +81,9 @@ export default function Login() {
                                 prefix={<LockOutlined />}
                                 type="password"
                             />
+                            {errors.password ? <Typography.Text type="danger"><small>Password is required.</small></Typography.Text> : null}
                         </div>
-                        <Button className={styles.button} type="primary" size="large" loading={loading} htmlType="submit">
+                        <Button className={styles.button} type="primary" size="large" loading={meLoading || authLoading} htmlType="submit">
                             Sign In
                         </Button>
                     </form>

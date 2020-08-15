@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 
-const ME_QUERY = gql`
+export const ME_QUERY = gql`
     query MeQuery{
         me {
             id
@@ -18,6 +18,7 @@ export const useMe = () => {
 
     return {
         user: data?.me,
+        loggedIn: Boolean(data?.me?.id),
         loading
     }
 }

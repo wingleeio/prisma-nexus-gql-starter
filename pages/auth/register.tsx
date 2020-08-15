@@ -8,7 +8,6 @@ import { useForm, Controller } from 'react-hook-form';
 import { UserOutlined, LockOutlined, GoogleOutlined } from '@ant-design/icons'
 import { useEffect } from 'react';
 import { useRouter } from 'next/router'
-import { T } from 'antd/lib/upload/utils';
 
 const styles = require('../../styles/auth.module.css');
 

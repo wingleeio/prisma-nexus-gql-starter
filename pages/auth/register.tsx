@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { useAuthentication } from "../../hooks/useAuthentication"
 import { useMe } from "../../hooks/useMe"
 import { App } from "../../components/layout/app";
-import { Layout, Typography, Input, Divider, Button } from "antd";
+import { Layout, Typography, Input, Divider, Button, Form } from "antd";
 import { useForm, Controller } from 'react-hook-form';
 import { UserOutlined, LockOutlined, GoogleOutlined } from '@ant-design/icons'
 import { useEffect } from 'react';
@@ -48,7 +48,11 @@ export default function Page() {
                     <Button className={styles.button} icon={<GoogleOutlined />} size="large">Sign up with Google</Button>
                     <Divider><Typography.Text type="secondary">Or</Typography.Text></Divider>
                     <form onSubmit={onSubmit}>
-                        <div className={styles.formItem}>
+                        <Form.Item
+                            className={styles.formItem}
+                            validateStatus={errors.email ? 'error' : null}
+                            help={errors.email && "Email is required."}
+                        >
                             <label>
                                 <Typography.Text strong={true}>Email</Typography.Text>
                             </label>
@@ -63,9 +67,12 @@ export default function Page() {
                                 rules={{ required: true, minLength: 6 }}
                                 prefix={<UserOutlined />}
                             />
-                            {errors.email ? <Typography.Text type="danger"><small>Email is required.</small></Typography.Text> : null}
-                        </div>
-                        <div className={styles.formItem}>
+                        </Form.Item>
+                        <Form.Item
+                            className={styles.formItem}
+                            validateStatus={errors.username ? 'error' : null}
+                            help={errors.username && "Username is required."}
+                        >
                             <label>
                                 <Typography.Text strong={true}>Username</Typography.Text>
                             </label>
@@ -80,9 +87,12 @@ export default function Page() {
                                 rules={{ required: true, minLength: 2 }}
                                 prefix={<UserOutlined />}
                             />
-                            {errors.username ? <Typography.Text type="danger"><small>Username is required.</small></Typography.Text> : null}
-                        </div>
-                        <div className={styles.formItem}>
+                        </Form.Item>
+                        <Form.Item
+                            className={styles.formItem}
+                            validateStatus={errors.password ? 'error' : null}
+                            help={errors.password && "Password is required. Must be 6 characters or longer."}
+                        >
                             <label>
                                 <Typography.Text strong={true}>Password</Typography.Text>
                             </label>
@@ -98,8 +108,7 @@ export default function Page() {
                                 prefix={<LockOutlined />}
                                 type="password"
                             />
-                            {errors.password ? <Typography.Text type="danger"><small>Password is required. Must be 6 characters or longer.</small></Typography.Text> : null}
-                        </div>
+                        </Form.Item>
                         <Button className={styles.button} type="primary" size="large" loading={meLoading || authLoading} htmlType="submit">
                             Sign Up
                         </Button>
